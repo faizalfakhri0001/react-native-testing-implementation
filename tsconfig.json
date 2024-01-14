@@ -1,3 +1,24 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "components/*":["src/components/*"],
+      "navigations/*": ["src/navigations/*"],
+      "types/*":["src/types/*"],
+      "store/*":["src/store/*"],
+      "pages":["src/pages"],
+      "utils":["src/utils"],
+      "assets":["src/assets"],
+      "hooks":["src/hooks"],
+      "helper":["src/helper"],
+      "config":["src/config"],
+      "services":["src/services"],
+      "data/*":["src/data/*"],
+    },
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  },
 }
