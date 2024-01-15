@@ -14,6 +14,13 @@ const Images = {
     games: require('./games.png'),
     food: require('./food.png'),
     pay_sekitar: require('./pay_sekitar.png'),
+    banner_1: require('./banner_1.png'),
+    main_banner_1: require('./main_banner_1.png'),
+    main_banner_2: require('./main_banner_2.jpeg'),
+    main_banner_3: require('./main_banner_3.jpeg'),
+    main_banner_4: require('./main_banner_4.png'),
+    main_banner_5: require('./main_banner_5.png'),
+    main_banner_6: require('./main_banner_6.png'),
 }
 
 export default Images

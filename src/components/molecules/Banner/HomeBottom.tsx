@@ -4,26 +4,26 @@ import { Images } from 'assets'
 
 type Props = {}
 
-const Home = (props: Props) => {
+const HomeBottom = (props: Props) => {
   return (
     <View style={styles.container}>
       <Image
+        source={Images.banner_1}
+        resizeMode='contain'
         style={styles.image}
-        resizeMode='stretch'
-        source={Images.main_banner_3}
       />
     </View>
   )
 }
 
-export default Home
+export default HomeBottom
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
   },
   image: {
     width: '100%',
-    height: '100%',
+    height: 120,
+    marginTop: 12,
   },
 })

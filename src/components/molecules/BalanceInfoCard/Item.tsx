@@ -14,7 +14,7 @@ const Item = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <Icon name={props.iconName} size={17} color={props.iconColor}/>
+        <Icon name={props.iconName} size={20} color={props.iconColor}/>
         <Text allowFontScaling={false} style={styles.valueText}>{props.value}</Text>
       </View>
       <Text allowFontScaling={false} style={styles.descrption}>{props.description}</Text>
@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     flexDirection: 'row',
+    columnGap: 4,
+    alignItems: 'center',
   },
   valueText: {
     color: Color.black,
