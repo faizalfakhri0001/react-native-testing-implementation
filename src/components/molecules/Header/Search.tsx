@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
-import { NativeModules, Platform, Pressable, StatusBar, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { NativeModules, Pressable, StyleSheet, View, ViewProps } from 'react-native'
 import IconCompoenent from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Input } from 'components/atoms'
+import Animated, { AnimatedProps } from 'react-native-reanimated';
 
 const {StatusBarManager} = NativeModules;
 const StatusBarHeight = StatusBarManager.HEIGHT;
 
-type Props = {}
+type Props = {} & AnimatedProps<ViewProps>
 
 const Search = (props: Props) => {
   return (
-    <View style={styles.container}>
+    <Animated.View {...props} style={[styles.container, props.style]}>
       <Input.Icon
         containerStyle={styles.inputContainer}
         leftIcon='magnify'
@@ -25,7 +26,7 @@ const Search = (props: Props) => {
       <Pressable>
         <IconCompoenent name='chat-processing-outline' size={28} color={'white'}/>
       </Pressable>
-    </View>
+    </Animated.View>
   )
 }
 
@@ -33,7 +34,7 @@ export default Search
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBarHeight,
+    paddingTop: StatusBarHeight,
     flexDirection: 'row',
     justifyContent: 'space-between',
     columnGap: 12,

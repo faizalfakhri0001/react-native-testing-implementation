@@ -20,7 +20,6 @@ const TabStack = () => {
         options={() => {
           return {
             title:"Rekomendasi",
-            header: ({navigation}) => <Header.Search />,
             ...getCommonTabOption('thumb-up-outline')
           }
         }}

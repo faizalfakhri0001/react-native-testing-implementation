@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react'
-import { Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import { BalanceInfoCard, Banner, Menu, Section } from 'components/molecules'
+import React, { useCallback, useEffect } from 'react'
+import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native'
+import { BalanceInfoCard, Banner, Header, Menu, Section } from 'components/molecules'
 import { Color } from 'config';
 import { LiveThumbnail } from 'components/atoms';
 import { FlashList } from '@shopify/flash-list';
 import Flashsale from 'components/molecules/Flashsale';
 import { Images } from 'assets';
+import { TabScreenProps } from 'types/navigations';
+import Animated, { interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 StatusBar.setBarStyle("light-content");
 if (Platform.OS === "android") {
@@ -19,9 +21,11 @@ const gratis_ongkir = [
   Images.gratis_ongkir_extra_instan,
 ];
 
-type Props = {}
+interface Props extends TabScreenProps<'Recommendation'> {}
 
 const Recommendation = (props: Props) => {
+  const {navigation} = props;
+  const headerOpacity = useSharedValue(0);
 
   const renderLiveItem = useCallback(({item, index}: {item: any; index: number}) => {
     return (
@@ -52,9 +56,36 @@ const Recommendation = (props: Props) => {
             />;
   }, []);
 
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    headerOpacity.value = event.contentOffset.y;
+  });
+
+  const headerStyle = useAnimatedStyle(() => {
+    const color = interpolate(
+      headerOpacity.value,
+      [0, 100],
+      [0, 1]
+    );
+
+    return {
+      backgroundColor: `rgba(255,255,255, ${color})`,
+    };
+  });
+
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => <Header.Search style={headerStyle}/>,
+    })
+    return () => {}
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}} contentContainerStyle={{paddingBottom: 20}}>
+      <Animated.ScrollView
+        style={{flex: 1}} 
+        onScroll={scrollHandler}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 20}}>
         <Banner.Home />
         <View style={styles.topContainer}>
           <BalanceInfoCard cash={25000} coin={1500} />
@@ -98,7 +129,7 @@ const Recommendation = (props: Props) => {
           hideAllButton={true}
         >
         </Section>
-      </ScrollView>
+      </Animated.ScrollView>
     </SafeAreaView>
   )
 }
