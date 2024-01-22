@@ -26,7 +26,9 @@ const LiveThumbnail: React.FC<Props> = (props) => {
         posterResizeMode='cover'
         poster={props.poster}
         resizeMode="cover"
-        style={styles.backgroundVideo} 
+        style={styles.backgroundVideo}
+        playInBackground={true}
+        disableFocus={true}
       />
 
       <View style={styles.liveViewContainer}>

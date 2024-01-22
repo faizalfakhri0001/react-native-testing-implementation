@@ -4,6 +4,7 @@ import ServiceIcon from "./ServiceIcon";
 import LiveThumbnail from "./LiveThumbnail"; 
 import CountDown from "./CountDown";
 import ProductTag from "./ProductTag/ProductTag";
+import VideoThumbnail from "./VideoThumbnail";
 
 
 
@@ -12,6 +13,7 @@ export {
     Decorator,
     ServiceIcon,
     LiveThumbnail,
+    VideoThumbnail,
     ProductTag,
     CountDown,
 }

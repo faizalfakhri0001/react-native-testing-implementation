@@ -1,5 +1,6 @@
 import React, { useCallback, useImperativeHandle, useRef, useState } from 'react'
 import { StyleProp, StyleSheet, TextInput, TextInputProps, View, ViewStyle } from 'react-native'
+import Animated from 'react-native-reanimated';
 import IconCompoenent from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = {
@@ -59,7 +60,7 @@ const Icon = React.forwardRef<Ref, Props>((props, ref) => {
   }, [setIsDanger])
 
   return (
-    <View style={[styles.container, {borderColor: props.borderColor ? props.borderColor : isDanger ? "red" : 'gray'}, props.containerStyle]}>
+    <Animated.View style={[styles.container, {borderColor: props.borderColor ? props.borderColor : isDanger ? "red" : 'gray'}, props.containerStyle]}>
       {typeof props.leftIcon === 'string' ?
         <IconCompoenent name={props.leftIcon} size={props.leftIconSize ?? 20} color={isDanger ? "red" : isEmpty ? 'gray' : 'black'} /> : null
       }
@@ -74,7 +75,7 @@ const Icon = React.forwardRef<Ref, Props>((props, ref) => {
       {typeof props.rightIcon === 'string' ?
         <IconCompoenent name={props.rightIcon} size={20} onPress={props.onPressRightIcon} color={'gray'} /> : null
       }
-    </View>
+    </Animated.View>
   )
 })
 

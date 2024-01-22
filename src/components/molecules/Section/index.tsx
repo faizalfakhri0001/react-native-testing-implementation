@@ -9,6 +9,7 @@ type PropsTitle = {
   onPressAll?: () => void;
   hideAllButton?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  headerContainerStyle?: StyleProp<ViewStyle>;
 }
 
 type PropsComponent = {
@@ -17,6 +18,7 @@ type PropsComponent = {
   onPressAll?: () => void;
   hideAllButton?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  headerContainerStyle?: StyleProp<ViewStyle>;
 }
 
 type Props = (PropsTitle | PropsComponent) & ViewProps
@@ -24,7 +26,7 @@ type Props = (PropsTitle | PropsComponent) & ViewProps
 const Section: React.FC<Props> = props => {
   return (
     <View {...props} style={[styles.container, props.style]}>
-      <View style={styles.header}>
+      <View style={[styles.header, props.headerContainerStyle]}>
         {props.title != undefined && props.title != null ?
           <Text allowFontScaling={false} style={styles.title}>
             {props.title ?? ''}

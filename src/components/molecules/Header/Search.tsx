@@ -1,31 +1,37 @@
 import React from 'react'
-import { NativeModules, Pressable, StyleSheet, View, ViewProps } from 'react-native'
-import IconCompoenent from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NativeModules, Pressable, StyleProp, StyleSheet, TextStyle, View, ViewProps, ViewStyle } from 'react-native'
+import IconComponent from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Input } from 'components/atoms'
-import Animated, { AnimatedProps } from 'react-native-reanimated';
+import Animated, { AnimatedProps, AnimatedStyle } from 'react-native-reanimated';
 
 const {StatusBarManager} = NativeModules;
 const StatusBarHeight = StatusBarManager.HEIGHT;
 
-type Props = {} & AnimatedProps<ViewProps>
+type Props = {
+  iconStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
+  inputStyle?: StyleProp<ViewStyle>;
+} & AnimatedProps<ViewProps>
+
+const AnimatedIcon = Animated.createAnimatedComponent(IconComponent);
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const Search = (props: Props) => {
   return (
     <Animated.View {...props} style={[styles.container, props.style]}>
       <Input.Icon
-        containerStyle={styles.inputContainer}
+        containerStyle={[styles.inputContainer, props.inputStyle]}
         leftIcon='magnify'
         borderColor='transparent'
         rightIcon='camera-outline'
         placeholder='Cari produk disini'
       />
 
-      <Pressable>
-        <IconCompoenent name='cart-outline' size={28} color={'white'}/>
-      </Pressable>
-      <Pressable>
-        <IconCompoenent name='chat-processing-outline' size={28} color={'white'}/>
-      </Pressable>
+      <AnimatedPressable>
+        <AnimatedIcon name='cart-outline' size={28} style={[props.iconStyle, {backgroundColor: 'transparent'}]} />
+      </AnimatedPressable>
+      <AnimatedPressable>
+        <AnimatedIcon name='chat-processing-outline' size={28} style={[props.iconStyle, {backgroundColor: 'transparent'}]} />
+      </AnimatedPressable>
     </Animated.View>
   )
 }
@@ -46,6 +52,5 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     height: 42,
-    backgroundColor: 'white'
   },
 })
